@@ -1,0 +1,15 @@
+{
+  "listen": ":8080",
+  "sse_spill_threshold_bytes": 1048576,
+  "sse_cache_max_bytes": 67108864,
+  "providers": [
+    {
+      "name": "newapi1",
+      "api_base": "https://example.invalid/v1beta"
+    },
+    {
+      "name": "newapi2",
+      "api_base": "https://example.invalid/v1beta"
+    }
+  ]
+}

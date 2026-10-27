@@ -1,0 +1,43 @@
+services:
+  oai-to-gemini:
+    build:
+      context: .
+    image: oai-to-gemini:local
+    container_name: oai-to-gemini
+    restart: unless-stopped
+    volumes:
+      - ./config.yaml:/app/config.yaml:ro
+    expose:
+      - "8080"
+    networks:
+      newapi:
+        aliases:
+          - oai-to-gemini
+    # Not required for container-to-container access on the newapi network.
+    # Uncomment only for debugging from the Docker host:
+    # ports:
+    #   - "8080:8080"
+
+  # Optional example only. It is disabled unless explicitly enabled with:
+  #   docker compose --profile with-newapi up -d
+  # If your New API already runs in another compose project, do not start this
+  # service; instead mark the newapi network as external (see below).
+  new-api:
+    image: calciumion/new-api:latest
+    profiles: ["with-newapi"]
+    restart: unless-stopped
+    volumes:
+      - new-api-data:/data
+    networks:
+      - newapi
+
+networks:
+  newapi:
+    name: newapi
+    # If New API is managed by a different compose project, comment out the
+    # driver settings above and use the external network instead:
+    # external: true
+    # name: newapi
+
+volumes:
+  new-api-data:

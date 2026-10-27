@@ -1,0 +1,22 @@
+# Copy this file to config.yaml and replace the placeholder upstream addresses.
+# Do not put real API keys in this file: credentials are forwarded from the
+# client (New API) per request.
+listen: ":8080"
+
+# In-memory threshold before an aggregated SSE response spills to a temp file.
+sse_spill_threshold_bytes: 1048576
+# Soft limit for completed/stale SSE cache files. Cleanup runs at startup,
+# every minute, and when requests finish. It never truncates an in-progress
+# aggregation.
+sse_cache_max_bytes: 67108864
+# Optional cache base directory. Defaults to oai-to-gemini-sse under the
+# system temp dir; each process creates a random run-* instance subdirectory
+# under this base directory.
+# sse_cache_dir: /tmp/oai-to-gemini-sse
+
+providers:
+  - name: newapi1
+    api_base: https://example.invalid/v1beta
+  - name: newapi2
+    # api-base and base_url are accepted aliases for api_base.
+    base_url: https://example.invalid/v1beta

@@ -31,3 +31,9 @@ go.work.sum
 # Editor/IDE
 # .idea/
 # .vscode/
+
+# Local runtime configuration (may contain real upstream addresses)
+config.yaml
+config.json
+config.local.yaml
+config.local.json
